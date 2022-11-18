@@ -60,15 +60,16 @@ class Email():
 
     def forecastWeather(self):
         url = WEATHER_FORECAST + 'appid=' + WEATHER_KEY + '&q=Gdansk'
+        print(url)
         data = requests.get(url).json()
         data = data["list"]
 
         for line in data: 
-            if line['dt_txt'] == '2022-11-17 12:00:00':
+            if line['dt_txt'].endswith('12:00:00'):
                 self.temp_12 = round(line['main']['temp'] - 273, 1)
-            if line['dt_txt'] == '2022-11-17 15:00:00':
+            if line['dt_txt'].endswith('15:00:00'):
                 self.temp_15 = round(line['main']['temp'] - 273, 1)
-            if line['dt_txt'] == '2022-11-17 18:00:00':
+            if line['dt_txt'].endswith('18:00:00'):
                 self.temp_18 = round(line['main']['temp'] - 273, 1)
 
     def createMessage(self):
